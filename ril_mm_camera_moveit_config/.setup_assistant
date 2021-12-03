@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ril_mm_camera
+    relative_path: urdf/ril_mm_camera.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/ur5.srdf
+  CONFIG:
+    author_name: Sangbeom
+    author_email: psb5657@naver.com
+    generated_timestamp: 1638519534

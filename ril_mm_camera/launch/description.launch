@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="robot_namespace" default="/"/>
+  <arg name="laser_enabled" default="$(optenv HUSKY_LMS1XX_ENABLED false)"/>
+  <arg name="kinect_enabled" default="$(optenv HUSKY_KINECT_ENABLED false)"/>
+  <arg name="urdf_extras" default="$(optenv HUSKY_URDF_EXTRAS)"/>
+
+  <arg name="limited" default="false" doc="If true, limits joint range [-PI, PI] on all joints." />
+  <arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface" />
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find ril_mm_camera)/urdf/ril_mm_camera.urdf.xacro' 
+    transmission_hw_interface:=$(arg transmission_hw_interface)
+    --inorder
+    robot_namespace:=$(arg robot_namespace)
+    laser_enabled:=$(arg laser_enabled)
+    kinect_enabled:=$(arg kinect_enabled)
+    urdf_extras:=$(arg urdf_extras)
+    " />
+
+  <param if="$(arg limited)" name="robot_description" command="$(find xacro)/xacro --inorder '$(find ur_description)/urdf/ur5_joint_limited_robot.urdf.xacro' 
+    transmission_hw_interface:=$(arg transmission_hw_interface)" />
+
+
+
+
+</launch>
